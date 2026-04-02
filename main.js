@@ -1,6 +1,14 @@
 const addTaskBtn = document.getElementById('add-task-btn');
 const addTaskInput = document.getElementById('task-input');
-const tasks = document.getElementById('task-list');
+const taskList = document.getElementById('task-list');
+let tasks = [];
+
+function renderTasks() {
+  taskList.innerHTML = '';
+  for (let taskValue of tasks) {
+    addTaskToList(taskValue);
+  }
+}
 
 function addLi() {
   return document.createElement('li');
@@ -13,7 +21,7 @@ function addDelBtn(li) {
   li.appendChild(delBtn);
 }
 
-tasks.addEventListener('click', function (e) {
+taskList.addEventListener('click', function (e) {
   const el = e.target;
 
   if (el.classList.contains('delete')) {
@@ -30,14 +38,15 @@ function addTaskToList(inputText) {
   li.appendChild(span);
   addDelBtn(li);
 
-  tasks.appendChild(li);
+  taskList.appendChild(li);
 }
 
 addTaskBtn.addEventListener('click', function () {
   const taskText = addTaskInput.value.trim();
   if (taskText === '') return;
 
-  addTaskToList(taskText);
+  tasks.push(taskText);
+  renderTasks();
 
   addTaskInput.value = '';
 });
