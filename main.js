@@ -6,9 +6,30 @@ function addLi() {
   return document.createElement('li');
 }
 
+function addDelBtn(li) {
+  const delBtn = document.createElement('button');
+  delBtn.innerText = 'Delete';
+  delBtn.classList.add('delete');
+  li.appendChild(delBtn);
+}
+
+tasks.addEventListener('click', function (e) {
+  const el = e.target;
+
+  if (el.classList.contains('delete')) {
+    el.parentElement.remove();
+  }
+});
+
 function addTaskToList(inputText) {
   const li = addLi();
-  li.innerText = inputText;
+
+  const span = document.createElement('span');
+  span.innerText = inputText;
+
+  li.appendChild(span);
+  addDelBtn(li);
+
   tasks.appendChild(li);
 }
 
