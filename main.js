@@ -2,7 +2,8 @@ const addTaskBtn = document.getElementById('add-task-btn');
 const addTaskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 let tasks = [];
-
+loadTasks();
+renderTasks();
 function renderTasks() {
   taskList.innerHTML = '';
   for (let taskValue of tasks) {
@@ -12,6 +13,16 @@ function renderTasks() {
 
 function saveTasks() {
   localStorage.setItem('tasksJson', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+  const tasksString = localStorage.getItem('tasksJson');
+  if (tasksString === null) {
+    return (tasks = []);
+  } else {
+    const loadedTasks = JSON.parse(tasksString);
+    tasks = loadedTasks;
+  }
 }
 
 function addLi() {
