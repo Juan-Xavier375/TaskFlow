@@ -10,6 +10,10 @@ function renderTasks() {
   }
 }
 
+function saveTasks() {
+  localStorage.setItem('tasksJson', JSON.stringify(tasks));
+}
+
 function addLi() {
   return document.createElement('li');
 }
@@ -46,6 +50,7 @@ addTaskBtn.addEventListener('click', function () {
   if (taskText === '') return;
 
   tasks.push(taskText);
+  saveTasks();
   renderTasks();
 
   addTaskInput.value = '';
