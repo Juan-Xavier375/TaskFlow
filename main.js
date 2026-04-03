@@ -6,8 +6,8 @@ loadTasks();
 renderTasks();
 function renderTasks() {
   taskList.innerHTML = '';
-  tasks.forEach((taskValue, index) => {
-    addTaskToList(taskValue, index);
+  tasks.forEach((taskObj) => {
+    addTaskToList(taskObj);
   });
 }
 
@@ -25,9 +25,9 @@ function loadTasks() {
   }
 }
 
-function addLi(index) {
+function addLi(id) {
   const newLi = document.createElement('li');
-  newLi.dataset.index = index;
+  newLi.dataset.id = id;
   return newLi;
 }
 
@@ -42,18 +42,18 @@ taskList.addEventListener('click', function (e) {
   const el = e.target;
 
   if (el.classList.contains('delete')) {
-    const indexForDel = Number(el.parentElement.dataset.index);
-    tasks.splice(indexForDel, 1);
+    const taskId = Number(el.parentElement.dataset.id);
+    tasks = tasks.filter((task) => task.id !== taskId);
     saveTasks();
     renderTasks();
   }
 });
 
-function addTaskToList(inputText, index) {
-  const li = addLi(index);
+function addTaskToList(taskObj) {
+  const li = addLi(taskObj.id);
 
   const span = document.createElement('span');
-  span.innerText = inputText;
+  span.innerText = taskObj.text;
 
   li.appendChild(span);
   addDelBtn(li);
@@ -65,7 +65,11 @@ addTaskBtn.addEventListener('click', function () {
   const taskText = addTaskInput.value.trim();
   if (taskText === '') return;
 
-  tasks.push(taskText);
+  tasks.push({
+    id: Date.now(),
+    text: taskText,
+    done: false
+  });
   saveTasks();
   renderTasks();
 
