@@ -6,9 +6,9 @@ loadTasks();
 renderTasks();
 function renderTasks() {
   taskList.innerHTML = '';
-  for (let taskValue of tasks) {
-    addTaskToList(taskValue);
-  }
+  tasks.forEach((taskValue, index) => {
+    addTaskToList(taskValue, index);
+  });
 }
 
 function saveTasks() {
@@ -25,8 +25,10 @@ function loadTasks() {
   }
 }
 
-function addLi() {
-  return document.createElement('li');
+function addLi(index) {
+  const newLi = document.createElement('li');
+  newLi.dataset.index = index;
+  return newLi;
 }
 
 function addDelBtn(li) {
@@ -40,12 +42,15 @@ taskList.addEventListener('click', function (e) {
   const el = e.target;
 
   if (el.classList.contains('delete')) {
-    el.parentElement.remove();
+    const indexForDel = Number(el.parentElement.dataset.index);
+    tasks.splice(indexForDel, 1);
+    saveTasks();
+    renderTasks();
   }
 });
 
-function addTaskToList(inputText) {
-  const li = addLi();
+function addTaskToList(inputText, index) {
+  const li = addLi(index);
 
   const span = document.createElement('span');
   span.innerText = inputText;
