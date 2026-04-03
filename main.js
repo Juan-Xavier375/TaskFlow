@@ -46,11 +46,28 @@ taskList.addEventListener('click', function (e) {
     tasks = tasks.filter((task) => task.id !== taskId);
     saveTasks();
     renderTasks();
+  } else {
+    const li = el.closest('li');
+    if (!li) return;
+
+    const taskId = Number(li.dataset.id);
+
+    const task = tasks.find((task) => task.id === taskId);
+    if (!task) return;
+
+    task.done = !task.done;
+
+    saveTasks();
+    renderTasks();
   }
 });
 
 function addTaskToList(taskObj) {
   const li = addLi(taskObj.id);
+
+  if (taskObj.done) {
+    li.classList.add('completed');
+  }
 
   const span = document.createElement('span');
   span.innerText = taskObj.text;

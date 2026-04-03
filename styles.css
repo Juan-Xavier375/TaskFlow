@@ -7,3 +7,12 @@
 html {
   font-family: 'Nunito', sans-serif;
 }
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+#task-list li {
+  cursor: pointer;
+}
