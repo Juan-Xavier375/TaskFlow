@@ -59,6 +59,21 @@ function addDelBtn(li) {
   li.appendChild(delBtn);
 }
 
+function getTaskById(taskId) {
+  return tasks.find((task) => task.id === taskId);
+}
+
+function deleteTaskById(taskId) {
+  tasks = tasks.filter((task) => task.id !== taskId);
+}
+
+function toggleTaskById(taskId) {
+  const task = getTaskById(taskId);
+  if (!task) return;
+
+  task.done = !task.done;
+}
+
 taskList.addEventListener('click', function (e) {
   const el = e.target;
 
@@ -68,12 +83,9 @@ taskList.addEventListener('click', function (e) {
   const taskId = Number(li.dataset.id);
 
   if (el.classList.contains('delete')) {
-    tasks = tasks.filter((task) => task.id !== taskId);
+    deleteTaskById(taskId);
   } else {
-    const task = tasks.find((task) => task.id === taskId);
-    if (!task) return;
-
-    task.done = !task.done;
+    toggleTaskById(taskId);
   }
 
   saveTasks();
