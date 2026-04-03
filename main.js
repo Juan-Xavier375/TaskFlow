@@ -63,8 +63,13 @@ taskList.addEventListener('click', function (e) {
   const el = e.target;
 
   if (el.classList.contains('delete')) {
-    const taskId = Number(el.parentElement.dataset.id);
+    const li = el.closest('li');
+    if (!li) return;
+
+    const taskId = Number(li.dataset.id);
+
     tasks = tasks.filter((task) => task.id !== taskId);
+
     saveTasks();
     renderTasks();
   } else {
