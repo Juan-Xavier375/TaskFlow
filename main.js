@@ -62,30 +62,22 @@ function addDelBtn(li) {
 taskList.addEventListener('click', function (e) {
   const el = e.target;
 
+  const li = el.closest('li');
+  if (!li) return;
+
+  const taskId = Number(li.dataset.id);
+
   if (el.classList.contains('delete')) {
-    const li = el.closest('li');
-    if (!li) return;
-
-    const taskId = Number(li.dataset.id);
-
     tasks = tasks.filter((task) => task.id !== taskId);
-
-    saveTasks();
-    renderTasks();
   } else {
-    const li = el.closest('li');
-    if (!li) return;
-
-    const taskId = Number(li.dataset.id);
-
     const task = tasks.find((task) => task.id === taskId);
     if (!task) return;
 
     task.done = !task.done;
-
-    saveTasks();
-    renderTasks();
   }
+
+  saveTasks();
+  renderTasks();
 });
 
 function addTaskToList(taskObj) {
