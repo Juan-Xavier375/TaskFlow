@@ -1,12 +1,33 @@
 const addTaskBtn = document.getElementById('add-task-btn');
 const addTaskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
+const filterBtns = document.querySelectorAll('[data-filter]');
+let currentFilter = 'all';
 let tasks = [];
+
 loadTasks();
 renderTasks();
+
+filterBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach((b) => b.classList.remove('active-filter'));
+    btn.classList.add('active-filter');
+
+    currentFilter = btn.dataset.filter;
+    renderTasks();
+  });
+});
+
 function renderTasks() {
   taskList.innerHTML = '';
-  tasks.forEach((taskObj) => {
+
+  const filteredTasks = tasks.filter((task) => {
+    if (currentFilter === 'completed') return task.done === true;
+    if (currentFilter === 'pending') return task.done === false;
+    return true;
+  });
+
+  filteredTasks.forEach((taskObj) => {
     addTaskToList(taskObj);
   });
 }
