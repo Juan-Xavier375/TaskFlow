@@ -22,8 +22,8 @@ function renderTasks() {
   taskList.innerHTML = '';
 
   const filteredTasks = tasks.filter((task) => {
-    if (currentFilter === 'completed') return task.done === true;
-    if (currentFilter === 'pending') return task.done === false;
+    if (currentFilter === 'completed') return task.done;
+    if (currentFilter === 'pending') return !task.done;
     return true;
   });
 
