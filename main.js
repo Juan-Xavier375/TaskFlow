@@ -27,20 +27,36 @@ function renderTasks() {
     if (currentFilter === 'pending') return !task.done;
     return true;
   });
+
   filteredTasks.forEach((taskObj) => {
     addTaskToList(taskObj);
   });
 
-  attCount(filteredTasks);
+  if (!filteredTasks.length) {
+    emptyList();
+    return;
+  }
+  renderCounter(filteredTasks);
 }
 
-function attCount(taskForCount) {
+function emptyList() {
+  const emptyEl = document.createElement('p');
+  let emptyMessage;
+
+  if (currentFilter === 'completed') emptyMessage = 'No completed tasks yet!';
+  if (currentFilter === 'pending') emptyMessage = 'No pending tasks!';
+  if (currentFilter === 'all') emptyMessage = 'No tasks yet. Add one above!';
+  emptyEl.innerText = emptyMessage;
+  taskList.appendChild(emptyEl);
+}
+
+function renderCounter(taskForCount) {
   const count = taskForCount.length;
-  let textoMontado = `${count} ${currentFilter} tasks`;
+  let labelText = `${count} ${currentFilter} tasks`;
   if (currentFilter === 'all') {
-    textoMontado = `${count} tasks`;
+    labelText = `${count} tasks`;
   }
-  taskCount.innerText = textoMontado;
+  taskCount.innerText = labelText;
 }
 
 function saveTasks() {
