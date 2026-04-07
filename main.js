@@ -2,6 +2,7 @@ const addTaskBtn = document.getElementById('add-task-btn');
 const addTaskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 const filterBtns = document.querySelectorAll('[data-filter]');
+const taskCount = document.getElementById('task-counter');
 let currentFilter = 'all';
 let tasks = [];
 
@@ -26,10 +27,20 @@ function renderTasks() {
     if (currentFilter === 'pending') return !task.done;
     return true;
   });
-
   filteredTasks.forEach((taskObj) => {
     addTaskToList(taskObj);
   });
+
+  attCount(filteredTasks);
+}
+
+function attCount(taskForCount) {
+  const count = taskForCount.length;
+  let textoMontado = `${count} ${currentFilter} tasks`;
+  if (currentFilter === 'all') {
+    textoMontado = `${count} tasks`;
+  }
+  taskCount.innerText = textoMontado;
 }
 
 function saveTasks() {
