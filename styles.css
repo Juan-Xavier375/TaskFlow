@@ -55,6 +55,16 @@ body {
   cursor: pointer;
 }
 
+.filter-btn {
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .completed {
   text-decoration: line-through;
   opacity: 0.6;
