@@ -149,3 +149,9 @@ addTaskBtn.addEventListener('click', function () {
 
   addTaskInput.value = '';
 });
+
+addTaskInput.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    addTaskBtn.click();
+  }
+});
