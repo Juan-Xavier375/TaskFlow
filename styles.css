@@ -32,6 +32,22 @@ body {
   color: var(--color-text);
 }
 
+.filter-btn {
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.active-filter {
+  background-color: var(--color-accent);
+  color: #fff;
+  font-weight: bold;
+}
+
 .input-row {
   display: flex;
   gap: 0.6rem;
@@ -55,27 +71,25 @@ body {
   cursor: pointer;
 }
 
-.filter-btn {
-  border-radius: 999px;
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--color-border);
-  background: transparent;
-  color: var(--color-text-muted);
+#task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+#task-list li {
   cursor: pointer;
-  font-family: inherit;
+  display: flex;
+  padding: 0.8rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface-light);
 }
 
 .completed {
   text-decoration: line-through;
   opacity: 0.6;
-}
-
-#task-list li {
-  cursor: pointer;
-}
-
-.active-filter {
-  background-color: var(--color-accent);
-  color: #fff;
-  font-weight: bold;
 }
