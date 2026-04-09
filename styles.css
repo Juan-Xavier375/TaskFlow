@@ -6,6 +6,9 @@
   --color-text: #e2e2e2;
   --color-text-muted: #6b7280;
   --color-border: #ffffff12;
+  --color-accent-hover: #6a58e8;
+  --color-accent-soft: #7c6af714;
+  --color-accent-muted: #7c6af720;
 }
 
 * {
@@ -50,6 +53,13 @@ body {
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 700;
+  transition: all 0.18s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
 }
 
 .active-filter {
@@ -72,6 +82,7 @@ body {
   color: var(--color-text);
   font-family: inherit;
 }
+
 #add-task-btn {
   padding: 0.7rem 1.2rem;
   border-radius: 10px;
@@ -81,6 +92,12 @@ body {
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 700;
+  transition: all 0.18s ease;
+}
+
+#add-task-btn:hover {
+  transform: translateY(-1px);
+  background: var(--color-accent-hover);
 }
 
 #task-counter {
@@ -104,6 +121,13 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 10px;
   background: var(--color-surface-light);
+  transition: all 0.18s ease;
+}
+
+#task-list li:hover {
+  border-color: var(--color-accent-soft);
+  transform: translateX(2px);
+  background: var(--color-accent-muted);
 }
 
 .delete {
