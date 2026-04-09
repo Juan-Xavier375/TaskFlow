@@ -38,6 +38,15 @@ body {
   color: var(--color-text);
 }
 
+.container h1 {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.container h1 span {
+  color: var(--color-accent);
+}
+
 .filters {
   display: flex;
   gap: 0.5rem;
