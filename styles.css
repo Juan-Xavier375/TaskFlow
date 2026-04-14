@@ -91,6 +91,13 @@ body {
   background: var(--color-surface-light);
   color: var(--color-text);
   font-family: inherit;
+  transition: all 0.18s ease;
+}
+
+#task-input:focus {
+  border-color: var(--color-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 106, 247, 0.15);
 }
 
 #add-task-btn {
