@@ -9,6 +9,7 @@
   --color-accent-hover: #6a58e8;
   --color-accent-soft: #7c6af714;
   --color-accent-muted: #7c6af720;
+  --color-danger: #f87171;
 }
 
 * {
@@ -148,7 +149,14 @@ body {
   font-size: 0.8rem;
 }
 
+.delete:hover {
+  color: var(--color-danger);
+}
+
 .completed {
-  text-decoration: line-through;
   opacity: 0.6;
+}
+
+.completed span {
+  text-decoration: line-through;
 }
