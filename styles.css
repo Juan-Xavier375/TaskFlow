@@ -10,6 +10,7 @@
   --color-accent-soft: #7c6af714;
   --color-accent-muted: #7c6af720;
   --color-danger: #f87171;
+  --color-danger-soft: #f8717114;
 }
 
 * {
@@ -147,17 +148,49 @@ body {
   background: var(--color-accent-muted);
 }
 
-.delete {
+.task-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.65rem;
   background: transparent;
-  border: none;
+  border: 1px solid transparent;
   color: var(--color-text-muted);
   cursor: pointer;
   font-family: inherit;
   font-size: 0.8rem;
+  border-radius: 8px;
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.task-btn:hover {
+  transform: translateY(-1px);
 }
 
 .delete:hover {
   color: var(--color-danger);
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.edit-btn {
+  color: var(--color-text-muted);
+}
+
+.edit-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+  background: var(--color-accent-soft);
+}
+
+.task-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .completed {
