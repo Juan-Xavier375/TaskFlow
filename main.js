@@ -82,8 +82,15 @@ function addLi(id) {
 function addDelBtn(li) {
   const delBtn = document.createElement('button');
   delBtn.innerText = 'Delete';
-  delBtn.classList.add('delete');
+  delBtn.classList.add('task-btn', 'delete');
   li.appendChild(delBtn);
+}
+
+function addEditBtn(li) {
+  const editBtn = document.createElement('button');
+  editBtn.innerText = '✎';
+  editBtn.classList.add('task-btn', 'edit-btn');
+  li.appendChild(editBtn);
 }
 
 function getTaskById(taskId) {
@@ -111,6 +118,9 @@ taskList.addEventListener('click', function (e) {
 
   if (el.classList.contains('delete')) {
     deleteTaskById(taskId);
+  } else if (el.classList.contains('edit-btn')) {
+    // Edit click handled later
+    return;
   } else {
     toggleTaskById(taskId);
   }
@@ -129,8 +139,13 @@ function addTaskToList(taskObj) {
   const span = document.createElement('span');
   span.innerText = taskObj.text;
 
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.classList.add('task-buttons');
+
   li.appendChild(span);
-  addDelBtn(li);
+  addDelBtn(buttonsDiv);
+  addEditBtn(buttonsDiv);
+  li.appendChild(buttonsDiv);
 
   taskList.appendChild(li);
 }
