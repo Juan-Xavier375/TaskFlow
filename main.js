@@ -36,7 +36,7 @@ function renderTasks() {
     emptyList();
     return;
   }
-  renderCounter(filteredTasks);
+  renderCounter();
 }
 
 function emptyList() {
@@ -50,13 +50,10 @@ function emptyList() {
   taskList.appendChild(emptyEl);
 }
 
-function renderCounter(taskForCount) {
-  const count = taskForCount.length;
-  let labelText = `${count} ${currentFilter} tasks`;
-  if (currentFilter === 'all') {
-    labelText = `${count} tasks`;
-  }
-  taskCount.innerText = labelText;
+function renderCounter() {
+  const pendingCount = tasks.filter((task) => !task.done).length;
+
+  taskCount.innerText = `${pendingCount} pending tasks`;
 }
 
 function saveTasks() {
@@ -111,6 +108,8 @@ function toggleTaskById(taskId) {
 taskList.addEventListener('click', function (e) {
   const el = e.target;
 
+  if (el.tagName === 'INPUT') return;
+
   const li = el.closest('li');
   if (!li) return;
 
@@ -156,7 +155,10 @@ taskList.addEventListener('click', function (e) {
 
 function saveEdit(taskId, input) {
   const task = getTaskById(taskId);
-  task.text = input.value;
+  const newValue = input.value.trim();
+  if (newValue === '') return;
+
+  task.text = newValue;
 
   const newSpan = document.createElement('span');
   newSpan.innerText = task.text;
