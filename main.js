@@ -134,6 +134,9 @@ taskList.addEventListener('click', function (e) {
       newInput.classList.add('task-input');
       span.replaceWith(newInput);
       newInput.focus();
+      newInput.addEventListener('blur', () => {
+        saveEdit(taskId, newInput);
+      });
 
       newInput.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
