@@ -125,10 +125,13 @@ taskList.addEventListener('click', function (e) {
     if (input) {
       saveEdit(taskId, input);
     } else {
+      li.classList.remove('completed');
+
       const inputContent = span.textContent;
 
       const newInput = document.createElement('input');
       newInput.value = inputContent;
+      newInput.classList.add('task-input');
       span.replaceWith(newInput);
       newInput.focus();
 
