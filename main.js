@@ -119,7 +119,26 @@ taskList.addEventListener('click', function (e) {
   if (el.classList.contains('delete')) {
     deleteTaskById(taskId);
   } else if (el.classList.contains('edit-btn')) {
-    // Edit click handled later
+    const span = li.querySelector('span');
+    const input = li.querySelector('input');
+
+    if (input) {
+      saveEdit(taskId, input);
+    } else {
+      const inputContent = span.textContent;
+
+      const newInput = document.createElement('input');
+      newInput.value = inputContent;
+      span.replaceWith(newInput);
+      newInput.focus();
+
+      newInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          saveEdit(taskId, newInput);
+        }
+      });
+    }
+
     return;
   } else {
     toggleTaskById(taskId);
@@ -128,6 +147,18 @@ taskList.addEventListener('click', function (e) {
   saveTasks();
   renderTasks();
 });
+
+function saveEdit(taskId, input) {
+  const task = getTaskById(taskId);
+  task.text = input.value;
+
+  const newSpan = document.createElement('span');
+  newSpan.innerText = task.text;
+
+  input.replaceWith(newSpan);
+  saveTasks();
+  renderTasks();
+}
 
 function addTaskToList(taskObj) {
   const li = addLi(taskObj.id);
