@@ -13,20 +13,28 @@
     <title>TaskFlow - Task Manager</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Task<span>Flow</span></h1>
-      <div class="filters">
+    <main class="container">
+      <header>
+        <h1>Task<span>Flow</span></h1>
+      </header>
+
+      <section class="filters">
         <button class="filter-btn" data-filter="all">All</button>
         <button class="filter-btn" data-filter="completed">Completed</button>
         <button class="filter-btn" data-filter="pending">Pending</button>
-      </div>
+      </section>
+
       <p id="task-counter"></p>
-      <div class="input-row">
+
+      <section class="input-row">
         <input id="task-input" class="task-input" type="text" placeholder="Add a task" />
         <button id="add-task-btn">Add</button>
-      </div>
-      <ul id="task-list"></ul>
-    </div>
+      </section>
+
+      <section>
+        <ul id="task-list"></ul>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
