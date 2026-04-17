@@ -9,7 +9,7 @@ The focus of this project is on DOM manipulation, state management, and clean, m
 
 ## Live Demo
 
-👉 [View Live Demo](https://juan-xavier375.github.io/TaskFlow/) (placeholder - update with actual URL)
+👉 https://taskflow-juanx.netlify.app
 
 ---
 
@@ -84,7 +84,7 @@ TaskFlow/
 ├── styles.css
 ├── main.js
 └── assets/
-    └── preview.png
+└── preview.png
 
 ---
 
