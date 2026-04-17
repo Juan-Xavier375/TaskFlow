@@ -51,11 +51,15 @@ function emptyList() {
 }
 
 function renderCounter() {
-  const pendingCount = tasks.filter((task) => !task.done).length;
+  const pending = tasks.filter((t) => !t.done).length;
+  const total = tasks.length;
 
-  const label = pendingCount === 1 ? 'task' : 'tasks';
+  if (total === 0) {
+    taskCount.innerText = 'No tasks yet';
+    return;
+  }
 
-  taskCount.innerText = `${pendingCount} pending ${label}`;
+  taskCount.innerText = `${pending} pending • ${total} total`;
 }
 
 function saveTasks() {
