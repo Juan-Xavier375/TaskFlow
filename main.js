@@ -208,6 +208,7 @@ addTaskBtn.addEventListener('click', function () {
   renderTasks();
 
   addTaskInput.value = '';
+  addTaskInput.focus();
 });
 
 addTaskInput.addEventListener('keydown', function (event) {
