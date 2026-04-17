@@ -76,18 +76,18 @@ function addLi(id) {
   return newLi;
 }
 
-function addDelBtn(li) {
+function addDelBtn(container) {
   const delBtn = document.createElement('button');
   delBtn.innerText = 'Delete';
   delBtn.classList.add('task-btn', 'delete');
-  li.appendChild(delBtn);
+  container.appendChild(delBtn);
 }
 
-function addEditBtn(li) {
+function addEditBtn(container) {
   const editBtn = document.createElement('button');
   editBtn.innerText = '✎';
   editBtn.classList.add('task-btn', 'edit-btn');
-  li.appendChild(editBtn);
+  container.appendChild(editBtn);
 }
 
 function getTaskById(taskId) {
