@@ -3,6 +3,7 @@ const addTaskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 const filterBtns = document.querySelectorAll('[data-filter]');
 const taskCount = document.getElementById('task-counter');
+
 let currentFilter = 'all';
 let tasks = [];
 
@@ -28,30 +29,31 @@ function renderTasks() {
     return true;
   });
 
-  filteredTasks.forEach((taskObj) => {
-    addTaskToList(taskObj);
+  filteredTasks.forEach((task) => {
+    addTaskToList(task);
   });
 
   renderCounter();
 
   if (!filteredTasks.length) {
-    emptyList();
+    renderEmptyState();
   }
 }
 
-function emptyList() {
+function renderEmptyState() {
   const emptyEl = document.createElement('p');
   let emptyMessage;
 
   if (currentFilter === 'completed') emptyMessage = 'No completed tasks yet!';
   if (currentFilter === 'pending') emptyMessage = 'No pending tasks!';
   if (currentFilter === 'all') emptyMessage = 'No tasks yet. Add one above!';
+
   emptyEl.innerText = emptyMessage;
   taskList.appendChild(emptyEl);
 }
 
 function renderCounter() {
-  const pending = tasks.filter((t) => !t.done).length;
+  const pending = tasks.filter((task) => !task.done).length;
   const total = tasks.length;
 
   if (total === 0) {
@@ -67,29 +69,30 @@ function saveTasks() {
 }
 
 function loadTasks() {
-  const tasksString = localStorage.getItem('tasksJson');
-  if (tasksString === null) {
-    return (tasks = []);
-  } else {
-    const loadedTasks = JSON.parse(tasksString);
-    tasks = loadedTasks;
+  const storedTasks = localStorage.getItem('tasksJson');
+
+  if (!storedTasks) {
+    tasks = [];
+    return;
   }
+
+  tasks = JSON.parse(storedTasks);
 }
 
-function addLi(id) {
-  const newLi = document.createElement('li');
-  newLi.dataset.id = id;
-  return newLi;
+function createTaskElement(id) {
+  const li = document.createElement('li');
+  li.dataset.id = id;
+  return li;
 }
 
-function addDelBtn(container) {
+function createDeleteButton(container) {
   const delBtn = document.createElement('button');
   delBtn.innerText = 'Delete';
   delBtn.classList.add('task-btn', 'delete');
   container.appendChild(delBtn);
 }
 
-function addEditBtn(container) {
+function createEditButton(container) {
   const editBtn = document.createElement('button');
   editBtn.innerText = '✎';
   editBtn.classList.add('task-btn', 'edit-btn');
@@ -137,13 +140,15 @@ taskList.addEventListener('click', function (e) {
       const newInput = document.createElement('input');
       newInput.value = inputContent;
       newInput.classList.add('task-input');
+
       span.replaceWith(newInput);
       newInput.focus();
+
       newInput.addEventListener('blur', () => {
         saveEdit(taskId, newInput);
       });
 
-      newInput.addEventListener('keydown', function (event) {
+      newInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           saveEdit(taskId, newInput);
         }
@@ -162,6 +167,7 @@ taskList.addEventListener('click', function (e) {
 function saveEdit(taskId, input) {
   const task = getTaskById(taskId);
   const newValue = input.value.trim();
+
   if (newValue === '') return;
 
   task.text = newValue;
@@ -170,27 +176,28 @@ function saveEdit(taskId, input) {
   newSpan.innerText = task.text;
 
   input.replaceWith(newSpan);
+
   saveTasks();
   renderTasks();
 }
 
-function addTaskToList(taskObj) {
-  const li = addLi(taskObj.id);
+function addTaskToList(task) {
+  const li = createTaskElement(task.id);
 
-  if (taskObj.done) {
+  if (task.done) {
     li.classList.add('completed');
   }
 
   const span = document.createElement('span');
-  span.innerText = taskObj.text;
+  span.innerText = task.text;
 
-  const buttonsDiv = document.createElement('div');
-  buttonsDiv.classList.add('task-buttons');
+  const actionsContainer = document.createElement('div');
+  actionsContainer.classList.add('task-buttons');
 
   li.appendChild(span);
-  addDelBtn(buttonsDiv);
-  addEditBtn(buttonsDiv);
-  li.appendChild(buttonsDiv);
+  createDeleteButton(actionsContainer);
+  createEditButton(actionsContainer);
+  li.appendChild(actionsContainer);
 
   taskList.appendChild(li);
 }
@@ -204,6 +211,7 @@ addTaskBtn.addEventListener('click', function () {
     text: taskText,
     done: false
   });
+
   saveTasks();
   renderTasks();
 
