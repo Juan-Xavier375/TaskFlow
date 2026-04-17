@@ -32,11 +32,11 @@ function renderTasks() {
     addTaskToList(taskObj);
   });
 
+  renderCounter();
+
   if (!filteredTasks.length) {
     emptyList();
-    return;
   }
-  renderCounter();
 }
 
 function emptyList() {
@@ -53,7 +53,9 @@ function emptyList() {
 function renderCounter() {
   const pendingCount = tasks.filter((task) => !task.done).length;
 
-  taskCount.innerText = `${pendingCount} pending tasks`;
+  const label = pendingCount === 1 ? 'task' : 'tasks';
+
+  taskCount.innerText = `${pendingCount} pending ${label}`;
 }
 
 function saveTasks() {
